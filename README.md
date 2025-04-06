@@ -1,22 +1,16 @@
-# Virtual Smart Home Network 🏡
+# Network Scanner (Python)
 
-This lab project simulates a smart home network using VirtualBox, pfSense, and Wireshark to explore network behavior and security settings.
+This is a simple ARP-based network scanner built using Scapy in Python.
 
 ## Features
-- Multiple VMs simulating smart home devices
-- Network traffic analysis using Wireshark
-- Custom firewall rules using pfSense
+- Scans a subnet (e.g., 192.168.1.1/24)
+- Displays IP and MAC address of connected devices
 
-## Technologies
-- VirtualBox
-- pfSense
-- Wireshark
+## Requirements
+- Python 3
+- scapy library (`pip install scapy`)
 
-## Learning Outcome
-Learned how home networks communicate and how to secure them.
-
-## Setup Instructions
-1. Import VMs into VirtualBox
-2. Configure pfSense and devices
-3. Capture and analyze traffic
-# network-scanner
+## Usage
+Run the script in terminal:
+```bash
+python scanner.py
