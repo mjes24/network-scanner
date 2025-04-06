@@ -1,14 +1,15 @@
-import socket
-import subprocess
-import ipaddress
+import scapy.all as scapy
 
-subnet = "192.168.1.0/24"
-online_ips = []
+def scan(ip):
+    arp_request = scapy.ARP(pdst=ip)
+    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+    arp_request_broadcast = broadcast/arp_request
+    answered = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
 
-for ip in ipaddress.IPv4Network(subnet):
-    result = subprocess.run(['ping', '-c', '1', str(ip)], stdout=subprocess.DEVNULL)
-    if result.returncode == 0:
-        online_ips.append(str(ip))
+    print("IP\t\t\tMAC Address")
+    print("-----------------------------------------")
+    for element in answered:
+        print(element[1].psrc + "\t\t" + element[1].hwsrc)
 
-print("Active devices:")
-print("\n".join(online_ips))
+# Example usage
+scan("192.168.1.1/24")
